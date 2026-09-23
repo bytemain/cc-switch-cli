@@ -865,8 +865,11 @@ mod tests {
 
         assert_eq!(
             display_names,
-            vec!["Claude", "Codex", "Gemini", "OpenCode", "Hermes", "OpenClaw", "Pi"]
+            vec![
+                "Claude", "Codex", "Gemini", "OpenCode", "Hermes", "OpenClaw", "Pi", "Kimi"
+            ]
         );
+        assert_eq!(LocalTool::Kimi.binary_name(), "kimi");
         assert_eq!(LocalTool::Hermes.binary_name(), "hermes");
         assert_eq!(LocalTool::OpenClaw.binary_name(), "openclaw");
         assert_eq!(LocalTool::Pi.binary_name(), "pi");
