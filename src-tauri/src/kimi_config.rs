@@ -477,7 +477,7 @@ pub fn set_current_provider(id: &str, provider_config: &Value) -> Result<(), App
     }
 
     doc["default_model"] = toml_edit::value(&target_model);
-    write_prepared_config(&doc.to_string())
+    write_file_atomic(&path, &doc.to_string(), 0o644).map_err(|e| AppError::Message(e.to_string()))
 }
 
 /// 设置默认模型
@@ -499,7 +499,7 @@ pub fn set_default_model(model_name: &str) -> Result<String, AppError> {
             .map_err(|e| AppError::Config(format!("Failed to parse Kimi config.toml: {e}")))?
     };
     doc["default_model"] = toml_edit::value(model_name);
-    write_prepared_config(&doc.to_string())?;
+    write_file_atomic(&path, &doc.to_string(), 0o644).map_err(|e| AppError::Message(e.to_string()))?;
     Ok(model_name.to_string())
 }
 
